@@ -1,6 +1,6 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUF_SIZE 9999
+# define BUF_SIZE 1000000
 #include <string.h>
 #include <stdlib.h>
 
