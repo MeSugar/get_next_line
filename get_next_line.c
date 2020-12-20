@@ -6,7 +6,7 @@
 /*   By: gdelta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 16:12:50 by gdelta            #+#    #+#             */
-/*   Updated: 2020/12/20 16:12:59 by gdelta           ###   ########.fr       */
+/*   Updated: 2020/12/21 01:00:33 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,20 @@ int next_line_exists(char **next_line, char **line)
     char *line_break;
     char *tmp;
 
-    *line = ft_strdup(*next_line);
+	line_break = 0;
+	*line = ft_strdup(*next_line);
     if ((line_break = ft_strchr(*line, '\n')))
     {
         *line_break = '\0';
-        ft_strcpy(*next_line, ++line_break);
+		ft_strcpy(*next_line, ++line_break);
         return (1);    
     }
     else
-    {
-       *next_line = "\0";
-       return (0);
-    }
-
+	{
+		while (*next_line)
+			*next_line++ = "\0";
+		return (0);
+	}
 }
 
 int get_next_line(int fd, char **line)
@@ -55,6 +56,8 @@ int get_next_line(int fd, char **line)
         {
             *line_break = '\0';
             next_line = ft_strdup(++line_break);
+			tmp = next_line;
+			free(tmp);
         }
         tmp = *line;
         *line = ft_strjoin(*line, buf);
@@ -62,8 +65,7 @@ int get_next_line(int fd, char **line)
     }
     if(byte_reader || ft_strlen(next_line) || ft_strlen(*line))
         return (1);
-    else
-        return(0);   
+	return(0);
 }
 
 int main ()
@@ -73,6 +75,11 @@ int main ()
 
     fd = open("text.txt", O_RDONLY);
     while(get_next_line(fd, &line))
+	{
         printf("%s\n\n", line);
+		free(line);
+	}
+	free(line);
+	sleep(100);
     return(0);
 }
