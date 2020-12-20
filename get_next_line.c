@@ -72,14 +72,17 @@ int main ()
 {
     char *line;
     int fd;
+    int a;
 
     fd = open("text.txt", O_RDONLY);
-    while(get_next_line(fd, &line))
+    while((a = get_next_line(fd, &line)))
 	{
-        printf("%s\n\n", line);
+        printf("return:%d\n", a);
+        printf("string:%s\n\n", line);
 		free(line);
 	}
+    printf("return:%d\n", a);
 	free(line);
-	sleep(100);
+	//leep(100);
     return(0);
 }
