@@ -1,9 +1,37 @@
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gdelta <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/20 16:12:50 by gdelta            #+#    #+#             */
+/*   Updated: 2020/12/20 16:12:59 by gdelta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "get_next_line.h"
 
+int next_line_exists(char **next_line, char **line)
+{
+    char *line_break;
+    char *tmp;
+
+    *line = ft_strdup(*next_line);
+    if ((line_break = ft_strchr(*line, '\n')))
+    {
+        *line_break = '\0';
+        ft_strcpy(*next_line, ++line_break);
+        return (1);    
+    }
+    else
+    {
+       *next_line = "\0";
+       return (0);
+    }
+
+}
 
 int get_next_line(int fd, char **line)
 {
@@ -11,58 +39,40 @@ int get_next_line(int fd, char **line)
     int byte_reader;
     char *line_break;
     static char *next_line;
-    int stopper;
     char *tmp;
 
-    stopper = 1;
+    if (fd < 1 || !line || BUF_SIZE <= 0)
+        return (-1);
+    line_break = 0;
     if (next_line)
-    {
-        *line = ft_strdup(next_line);
-        if ((line_break = ft_strchr(*line, '\n')))
-        {
-            *line_break = '\0';
-            next_line = ft_strdup(++line_break);
-        } 
-    }  
+        next_line_exists(&next_line, line);
     else
-        *line = (char*)ft_calloc(1, 1);
-    while(stopper && (byte_reader = read(fd, buf, BUF_SIZE)))
+        *line = (char*)calloc(1, 1);
+    while(!line_break && (byte_reader = read(fd, buf, BUF_SIZE)))
     {
         buf[byte_reader] = '\0';
         if((line_break = ft_strchr(buf, '\n')))
         {
             *line_break = '\0';
             next_line = ft_strdup(++line_break);
-            tmp = next_line;
-            free(next_line);
-            next_line = tmp;
-            stopper--;
         }
+        tmp = *line;
         *line = ft_strjoin(*line, buf);
+        free(tmp);
     }
-    if(next_line)
-        return (1);     
+    if(byte_reader || ft_strlen(next_line) || ft_strlen(*line))
+        return (1);
+    else
+        return(0);   
+}
+
+int main ()
+{
+    char *line;
+    int fd;
+
+    fd = open("text.txt", O_RDONLY);
+    while(get_next_line(fd, &line))
+        printf("%s\n\n", line);
     return(0);
 }
-
-int main()
-{
-    int fd;
-    char *line;
-
-    if((fd = open("text.txt", O_RDONLY)) == -1)
-    {
-        printf("error");
-        return(0);
-    }
-    get_next_line(fd, &line);
-    printf("%s\n\n", line);
-
-    get_next_line(fd, &line);
-    printf("%s\n\n", line);
-
-    get_next_line(fd, &line);
-    printf("%s\n\n", line);
-    return (0);
-}
-
