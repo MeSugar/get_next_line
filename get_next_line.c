@@ -6,7 +6,7 @@
 /*   By: gdelta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 16:12:50 by gdelta            #+#    #+#             */
-/*   Updated: 2020/12/21 01:00:33 by student          ###   ########.fr       */
+/*   Updated: 2020/12/22 21:35:12 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int next_line_exists(char **next_line, char **line)
 {
     char *line_break;
-    char *tmp;
 
 	line_break = 0;
 	*line = ft_strdup(*next_line);
@@ -28,8 +27,8 @@ int next_line_exists(char **next_line, char **line)
     }
     else
 	{
-		while (*next_line)
-			*next_line++ = "\0";
+		free(*next_line);
+		*next_line = 0;
 		return (0);
 	}
 }
@@ -56,8 +55,6 @@ int get_next_line(int fd, char **line)
         {
             *line_break = '\0';
             next_line = ft_strdup(++line_break);
-			tmp = next_line;
-			free(tmp);
         }
         tmp = *line;
         *line = ft_strjoin(*line, buf);
@@ -77,12 +74,10 @@ int main ()
     fd = open("text.txt", O_RDONLY);
     while((a = get_next_line(fd, &line)))
 	{
-        printf("return:%d\n", a);
         printf("string:%s\n\n", line);
 		free(line);
 	}
-    printf("return:%d\n", a);
 	free(line);
-	//leep(100);
+	sleep(100);
     return(0);
 }
