@@ -73,7 +73,6 @@ int main ()
     char *line;
     int fd;
 
-<<<<<<< HEAD
     fd = open("../text.txt", O_RDONLY);
     while (get_next_line(fd, &line))
     {
@@ -83,15 +82,4 @@ int main ()
     free(line);
     //sleep(100);
     return (0);
-=======
-    fd = open("text.txt", O_RDONLY);
-    while((a = get_next_line(fd, &line)))
-	{
-        printf("string:%s\n\n", line);
-		free(line);
-	}
-	free(line);
-	sleep(100);
-    return(0);
->>>>>>> 2e9cdcb82c91c7c8b28edd27e1382ade5f8ee8f8
 }
