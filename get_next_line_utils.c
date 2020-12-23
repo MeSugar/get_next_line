@@ -6,7 +6,7 @@
 /*   By: gdelta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 16:14:02 by gdelta            #+#    #+#             */
-/*   Updated: 2020/12/20 16:14:07 by gdelta           ###   ########.fr       */
+/*   Updated: 2020/12/22 21:17:22 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t len;
 
+	if (!s)
+		return (0);
 	len = 0;
 	if (!s)
 	    return (len);

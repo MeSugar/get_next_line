@@ -6,7 +6,11 @@
 /*   By: gdelta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 16:12:50 by gdelta            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/12/23 20:44:37 by gdelta           ###   ########.fr       */
+=======
+/*   Updated: 2020/12/22 21:35:12 by student          ###   ########.fr       */
+>>>>>>> 2e9cdcb82c91c7c8b28edd27e1382ade5f8ee8f8
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +73,7 @@ int main ()
     char *line;
     int fd;
 
+<<<<<<< HEAD
     fd = open("../text.txt", O_RDONLY);
     while (get_next_line(fd, &line))
     {
@@ -78,4 +83,15 @@ int main ()
     free(line);
     //sleep(100);
     return (0);
+=======
+    fd = open("text.txt", O_RDONLY);
+    while((a = get_next_line(fd, &line)))
+	{
+        printf("string:%s\n\n", line);
+		free(line);
+	}
+	free(line);
+	sleep(100);
+    return(0);
+>>>>>>> 2e9cdcb82c91c7c8b28edd27e1382ade5f8ee8f8
 }
