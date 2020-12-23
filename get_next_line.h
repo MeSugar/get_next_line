@@ -6,14 +6,14 @@
 /*   By: gdelta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 16:13:34 by gdelta            #+#    #+#             */
-/*   Updated: 2020/12/20 18:21:51 by gdelta           ###   ########.fr       */
+/*   Updated: 2020/12/21 23:53:34 by gdelta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUF_SIZE
-# define BUF_SIZE 1
+# define BUF_SIZE 10000
 #endif
 #include <fcntl.h>
 #include <stdio.h>

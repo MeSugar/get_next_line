@@ -6,7 +6,7 @@
 /*   By: gdelta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 16:12:50 by gdelta            #+#    #+#             */
-/*   Updated: 2020/12/21 01:00:33 by student          ###   ########.fr       */
+/*   Updated: 2020/12/23 20:44:37 by gdelta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 int next_line_exists(char **next_line, char **line)
 {
     char *line_break;
-    char *tmp;
 
-	line_break = 0;
 	*line = ft_strdup(*next_line);
     if ((line_break = ft_strchr(*line, '\n')))
     {
@@ -28,8 +26,8 @@ int next_line_exists(char **next_line, char **line)
     }
     else
 	{
-		while (*next_line)
-			*next_line++ = "\0";
+		free(*next_line);
+		*next_line = 0;
 		return (0);
 	}
 }
@@ -42,22 +40,20 @@ int get_next_line(int fd, char **line)
     static char *next_line;
     char *tmp;
 
-    if (fd < 1 || !line || BUF_SIZE <= 0)
+    if (fd < 1 || !line || BUF_SIZE < 1)
         return (-1);
     line_break = 0;
     if (next_line)
         next_line_exists(&next_line, line);
     else
         *line = (char*)calloc(1, 1);
-    while(!line_break && (byte_reader = read(fd, buf, BUF_SIZE)))
+    while(!next_line && !line_break && (byte_reader = read(fd, buf, BUF_SIZE)))
     {
         buf[byte_reader] = '\0';
         if((line_break = ft_strchr(buf, '\n')))
         {
             *line_break = '\0';
             next_line = ft_strdup(++line_break);
-			tmp = next_line;
-			free(tmp);
         }
         tmp = *line;
         *line = ft_strjoin(*line, buf);
@@ -72,17 +68,14 @@ int main ()
 {
     char *line;
     int fd;
-    int a;
 
-    fd = open("text.txt", O_RDONLY);
-    while((a = get_next_line(fd, &line)))
-	{
-        printf("return:%d\n", a);
+    fd = open("../text.txt", O_RDONLY);
+    while (get_next_line(fd, &line))
+    {
         printf("string:%s\n\n", line);
-		free(line);
-	}
-    printf("return:%d\n", a);
-	free(line);
-	//leep(100);
-    return(0);
+        free(line);
+    }
+    free(line);
+    //sleep(100);
+    return (0);
 }
