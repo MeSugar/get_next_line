@@ -6,7 +6,7 @@
 /*   By: gdelta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 21:06:52 by gdelta            #+#    #+#             */
-/*   Updated: 2020/12/24 01:43:53 by gdelta           ###   ########.fr       */
+/*   Updated: 2020/12/27 20:47:07 by gdelta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_strlen(const char *s)
 
 	len = 0;
 	if (!s)
-	    return (len);
+		return (len);
 	while (s[len])
 		len++;
 	return (len);
@@ -32,7 +32,8 @@ char	*ft_strjoin(const char *s1, const char *s2)
 
 	if (!s1 || !s2)
 		return (0);
-	if (!(s3 = (char*)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
+	if (!(s3 = (char*)malloc(sizeof(char) * (ft_strlen(s1) +
+	ft_strlen(s2) + 1))))
 		return (0);
 	i = 0;
 	while (s1[i])
