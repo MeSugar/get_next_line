@@ -52,29 +52,15 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (s3);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+char	*ft_calloc(size_t size)
 {
-	void *i;
+	char *str;
 
-	i = malloc(count * size);
-	if (i == 0)
+	str = malloc(size);
+	if (str == 0)
 		return (0);
-	ft_memset(i, 0, count * size);
-	return (i);
-}
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	unsigned char *str;
-
-	str = (unsigned char*)b;
-	while (len)
-	{
-		*str = (unsigned char)c;
-		str++;
-		len--;
-	}
-	return (b);
+	*str = '\0';
+	return (str);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -104,20 +90,4 @@ char	*ft_strdup(const char *s1)
 	}
 	s2[i] = '\0';
 	return (s2);
-}
-
-char	*ft_strcpy(char *dst, const char *src)
-{
-	size_t j;
-
-	if (!dst || !src)
-		return (0);
-	j = 0;
-	while (src[j])
-	{
-		dst[j] = src[j];
-		j++;
-	}
-	dst[j] = '\0';
-	return (dst);
 }
