@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*ft_strcpy(char *dst, const char *src)
+static char	*ft_strcpy(char *dst, const char *src)
 {
 	size_t j;
 
@@ -28,7 +28,7 @@ char	*ft_strcpy(char *dst, const char *src)
 	return (dst);
 }
 
-int		next_line_exists(char **next_line, char **line)
+static int	next_line_exists(char **next_line, char **line)
 {
 	char	*line_break;
 
@@ -55,7 +55,7 @@ int		next_line_exists(char **next_line, char **line)
 	}
 }
 
-int		next_line_checker(char **next_line, char **line)
+static int	next_line_checker(char **next_line, char **line)
 {
 	if (*next_line)
 	{
@@ -67,7 +67,7 @@ int		next_line_checker(char **next_line, char **line)
 	return (0);
 }
 
-void	next_line_finder(char *line_break, char **next_line)
+static void	next_line_finder(char *line_break, char **next_line)
 {
 	*line_break = '\0';
 	if (*(line_break + 1))
@@ -79,7 +79,7 @@ void	next_line_finder(char *line_break, char **next_line)
 	}
 }
 
-int		get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	char		buf[BUFFER_SIZE + 1];
 	int			byte_reader;
