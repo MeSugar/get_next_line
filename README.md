@@ -12,6 +12,6 @@ Returning values
 
 ## Usage
 Include header file to your programm and compile it whith .c files needed by GNL.
-```
+```C
 #include "get_next_line.h"
 ```
