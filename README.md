@@ -11,7 +11,7 @@ Returning values
 -1 if an error occurred, 0 if there is nothing to read in the file, 1 if the line was successfully read
 
 ## Usage
-Include header file to your programm and compile it with .c files needed by GNL.
+Include header file to your programm and compile it with source files needed by GNL.
 ```C
 #include "get_next_line.h"
 ```
