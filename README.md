@@ -1,5 +1,5 @@
 ## About
-The function gives a way to read content line by line from a given file descriptor until the end of the file.
+The function can be used in a loop and gives a way to read content line by line from a given file descriptor until the end of the file.
 
 Prototype:
 ```C
